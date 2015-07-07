@@ -56,11 +56,3 @@ def main():
 if __name__ == "__main__":
 	main()
 	print("--- %s seconds ---" % (time.time() - start_time))
-
-sys.exit()
-total = 0
-for file in range(1,7):
-	filename = "OUT/CBO_10045266-auth-5000-%s.mrc" % file
-	total += countRecords(filename)
-print "Total pour 5000: %s" % total
-countRecords("OUT/CBO_10045266-auth.mrc")
