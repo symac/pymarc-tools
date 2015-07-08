@@ -1,12 +1,15 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-#
+# -*- coding: utf-8 -*-
 import pymarc
-import sys, getopt, os, time
+import sys, getopt, os
+import time
 start_time = time.time()
 
-# This script will count the number of marc records in an iso2709
-# The process used might not be error-proof but it should be fast enough. 
-# Use the --errorproof param to use pymarc which has better error handling
+"""
+This script will count the number of marc records in an iso2709
+The process used might not be error-proof but it should be fast enough. 
+Use the --errorproof param to use pymarc which has better error handling
+"""
 
 def countRecords(filename, errorproof = False):
 	with open(filename) as f:
