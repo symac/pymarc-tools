@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import sys, argparse
 #reload(sys)
@@ -14,19 +14,24 @@ parser = argparse.ArgumentParser(description='Read an iso2709 file and display i
 
 parser.add_argument('filename')
 parser.add_argument('-tag',  default="", help='A tag to filter the output')
+parser.add_argument('-num',  default="", help='The number of the item we want to show')
+
 args = parser.parse_args()
 
 filename = args.filename
 tagFilter = args.tag
+recordNumber = args.num
+
 print "Opening %s" % filename
 nb = 1
 reader = MARCReader(open(filename));
 
 for record in reader:
-	print "\n##### RECORD %s #####" % nb
-	for field in [x for x in record if (tagFilter == "" or x.tag == tagFilter)]:
-		fieldValue = field.__str__().encode("utf-8")
-		print fieldValue
+	if recordNumber == "" or recordNumber == str(nb):
+		print "\n##### RECORD %s #####" % nb
+		for field in [x for x in record if (tagFilter == "" or x.tag == tagFilter)]:
+			fieldValue = field.__str__().encode("utf-8")
+			print fieldValue
 	nb += 1
 
 print "%s records in file" % nb
