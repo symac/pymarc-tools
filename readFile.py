@@ -27,9 +27,12 @@ nb = 1
 reader = MARCReader(open(filename));
 
 for record in reader:
+	outputedLines = 0
 	if recordNumber == "" or recordNumber == str(nb):
-		print "\n##### RECORD %s #####" % nb
 		for field in [x for x in record if (tagFilter == "" or x.tag == tagFilter)]:
+			if outputedLines == 0:
+				print "\n##### RECORD %s #####" % nb
+				nb += 1
 			fieldValue = field.__str__().encode("utf-8")
 			print fieldValue
 	nb += 1
