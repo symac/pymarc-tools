@@ -22,9 +22,9 @@ args = parser.parse_args()
 filename = args.filename
 tagFilter = args.tag
 recordNumber = args.num
-maxRecords = int(args.max)
 
-if maxRecords == "": maxRecords = int("inf")
+if args.max == "": maxRecords = float("inf")
+else: maxRecords = int(args.max)
 
 print "Opening %s" % filename
 nb = 1
@@ -43,8 +43,6 @@ for record in reader:
 
 	if recordNumber == str(nb) or (nb >= maxRecords):
 		exit()
-	print nb
-	print maxRecords
 	nb += 1
 
 print "%s records in file" % (nb - 1)
