@@ -15,12 +15,16 @@ parser = argparse.ArgumentParser(description='Read an iso2709 file and display i
 parser.add_argument('filename')
 parser.add_argument('-tag',  default="", help='A tag to filter the output')
 parser.add_argument('-num',  default="", help='The number of the item we want to show')
+parser.add_argument('-max',  default="", help='Max number of items to display, after that we exit')
 
 args = parser.parse_args()
 
 filename = args.filename
 tagFilter = args.tag
 recordNumber = args.num
+maxRecords = int(args.max)
+
+if maxRecords == "": maxRecords = int("inf")
 
 print "Opening %s" % filename
 nb = 1
@@ -32,9 +36,15 @@ for record in reader:
 		for field in [x for x in record if (tagFilter == "" or x.tag == tagFilter)]:
 			if outputedLines == 0:
 				print "\n##### RECORD %s #####" % nb
-				nb += 1
+				outputedLines += 1
 			fieldValue = field.__str__().encode("utf-8")
 			print fieldValue
+
+
+	if recordNumber == str(nb) or (nb >= maxRecords):
+		exit()
+	print nb
+	print maxRecords
 	nb += 1
 
-print "%s records in file" % nb
+print "%s records in file" % (nb - 1)
