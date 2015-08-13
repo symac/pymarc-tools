@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from pymarc import MARCReader, marc8_to_unicode
 import sys, getopt
