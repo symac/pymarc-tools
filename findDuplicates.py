@@ -38,6 +38,12 @@ for f in args.filename:
 		files[f]['identifiers'][v001] = 1
 	print "> %s records" % nb
 
+# Store the number of records at the begining
+
+for f in files:	
+	files[f]['count_orig'] = len(files[f]['identifiers'])
+	
+	
 print "\n***   Analyze duplicates   ***"
 nb = 0
 for v001 in common:
@@ -55,19 +61,4 @@ print "> ID common between at least 2 files: %s" % nb
 
 print "> Uniqueness for each file :"
 for f in files:
-	print "\t%s : %s record(s)" % (f, len(files[f]['identifiers']))
-
-exit()
-
-filename = args.filename
-
-print "Opening %s" % filename
-outputedLines = 0
-for field in record:
-	fieldValue = field.__str__().encode("utf-8")
-	if "\n" in fieldValue:
-		print "Carriage return in record #%s (%s field)" % (nb, field.tag)
-
-nb += 1
-
-print "%s records in file" % (nb - 1)
+	print "\t%s : %s record(s) [out of %s]" % (f, len(files[f]['identifiers']), files[f]['count_orig'])
